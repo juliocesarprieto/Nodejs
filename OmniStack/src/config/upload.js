@@ -5,7 +5,9 @@ module.exports = {
     storage: multer.diskStorage({
         destination: path.resolve(__dirname, '..', '..', 'uploads'),
         filename: (req, file, callBack) => {
-            callBack(null, `${file.filename}-${Date.now()}${path.extname(file.originalname)}`);
+            const ext = path.extname(file.originalname);
+            const name = path.basename(file.originalname, ext);
+            callBack(null, `${name}-${Date.now()}${ext}`);
         }
     })
 };
